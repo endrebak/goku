@@ -31,7 +31,7 @@
 
  :main [ 
         {:des "Simple remaps"
-         :rules [[:condi :!shift-mode :!space-mode :!rc-mode :!cntrl-mode]
+         :rules [[:condi :!shift-mode :!space-mode :!rc-mode :!cntrl-mode :!command-mode]
                  ;; left-hand
                  [:tab :w] [:q :e] [:w :r] [:e :t] [:caps_lock :a] [:a :s] [:down_arrow :tab] [:left_shift :q] [:grave_accent_and_tilde :g] [:z :c] [:x :v] [:c :b]
                  ;; right-hand
@@ -50,6 +50,16 @@
         {
          :des "mod-tap layers"
          :rules [
+                       ;; space + left hand side F1..F12 buttons
+                       ;; keypad_enter: start software
+
+                       ;;  "description": "a held down to control",
+                       ;;  "description": "s held down to left_command",
+                       ;;  "description": "d held down to right_shift",
+                       ;;  "description": "keypad_5 held down to left control",
+                       ;;  "description": "keypad_6 held down to left_command",
+                       ;;  "description": "keypad_4 held down to right shift",
+
                  ;n-mode
                  [:spacebar nil [:!shift-mode]
                   {:alone {:key :spacebar :halt true} :delayed {:canceled {:key :spacebar}} :held {:set ["space-mode" 1] :repeat false} :afterup {:set ["space-mode" 0]}
@@ -66,8 +76,8 @@
                  [:s nil [:!shift-mode :!rc-mode :!space-mode]
                   {:alone {:key :d :halt true} :delayed {:canceled {:key :d}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
 
-                 [:keypad_6 nil [:!shift-mode :!rc-mode :!space-mode]
-                  {:alone {:key :k :halt true} :delayed {:canceled {:key :k}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+                 [:keypad_5 nil [:!shift-mode :!rc-mode :!space-mode]
+                  {:alone {:key :j :halt true} :delayed {:canceled {:key :j}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
                  ;shift-mode
                  [:d nil [:shift-mode :!rc-mode :!space-mode :!cntrl-mode]
                   {:alone {:key :!Rf :halt true} :delayed {:canceled {:key :!Rf}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
