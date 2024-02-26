@@ -31,15 +31,14 @@
 
  :main [ 
         {:des "Simple remaps"
-         :rules [[:condi :!t-mode :!space-mode :!rc-mode]
+         :rules [[:condi :!shift-mode :!space-mode :!rc-mode :!cntrl-mode]
                  ;; left-hand
-                 [:tab :w] [:q :e] [:w :r] [:e :t] [:caps_lock :a] [:a :s] [:s :d] [:down_arrow :tab] [:left_shift :q] [:grave_accent_and_tilde :g] [:z :c] [:x :v] [:c :b]
+                 [:tab :w] [:q :e] [:w :r] [:e :t] [:caps_lock :a] [:a :s] [:down_arrow :tab] [:left_shift :q] [:grave_accent_and_tilde :g] [:z :c] [:x :v] [:c :b]
                  ;; right-hand
                  [:keypad_1 :n]
                  [:keypad_2 :m]
                  [:keypad_3 :y]
                  [:keypad_5 :j]
-                 [:keypad_6 :k]
                  [:keypad_7 :u]
                  [:keypad_8 :i]
                  [:keypad_9 :o]
@@ -47,38 +46,42 @@
                  [:keypad_plus :l]
                  [:keypad_hyphen :n]
                  ]}
-        {:des "Remaps using left-command"
-         :rules [[:!Cdown_arrow :!Ctab] [:!Ctab :!Cw]]}
-        {:des "Remaps using right-command"
-         :rules [[:!Qtab :!R1]]}
-        {:des "Remaps using left shift"
-         :rules [[:!Stab :!Sw]]}
         ;NOTE: When adding a new layer, if you want it to be able to cross with an old one, you must add the name negated (:!new_name) to all other mod-tap layer conditions
         {
          :des "mod-tap layers"
          :rules [
                  ;n-mode
-                 [:spacebar nil [:!t-mode]
+                 [:spacebar nil [:!shift-mode]
                   {:alone {:key :spacebar :halt true} :delayed {:canceled {:key :spacebar}} :held {:set ["space-mode" 1] :repeat false} :afterup {:set ["space-mode" 0]}
                    ;if want to define ms delays here
                    ;:params {:alone 199 :held 200 :delay 200} 
                    }]
 
-                 ;t-mode
+                 [:s nil [:cntrl-mode :!shift-mode :!rc-mode :!space-mode]
+                  {:alone {:key :!Wd :halt true} :delayed {:canceled {:key :!Wd}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
 
-                 [:d nil [:t-mode :!rc-mode]
-                  {:alone {:key :!Rf :halt true} :delayed {:canceled {:key :!Rf}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
+                 [:keypad_6 nil [:cntrl-mode :!shift-mode :!rc-mode :!space-mode]
+                  {:alone {:key :!Wk :halt true} :delayed {:canceled {:key :!Wk}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
 
-                 [:d nil [:!space-mode :!rc-mode]
-                  {:alone {:key :f :halt true} :delayed {:canceled {:key :d}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
+                 [:s nil [:!shift-mode :!rc-mode :!space-mode]
+                  {:alone {:key :d :halt true} :delayed {:canceled {:key :d}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
 
-                 [:keypad_4 nil [:t-mode :!rc-mode]
-                  {:alone {:key :!Rh :halt true} :delayed {:canceled {:key :!Rh}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
+                 [:keypad_6 nil [:!shift-mode :!rc-mode :!space-mode]
+                  {:alone {:key :k :halt true} :delayed {:canceled {:key :k}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+                 ;shift-mode
+                 [:d nil [:shift-mode :!rc-mode :!space-mode :!cntrl-mode]
+                  {:alone {:key :!Rf :halt true} :delayed {:canceled {:key :!Rf}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
 
-                 [:keypad_4 nil [:!space-mode :!rc-mode]
-                  {:alone {:key :h :halt true} :delayed {:canceled {:key :h}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
+                 [:d nil [:!space-mode :!rc-mode :!cntrl-mode]
+                  {:alone {:key :f :halt true} :delayed {:canceled {:key :d}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
 
-                 [:right_arrow nil [:!space-mode :!t-mode]
+                 [:keypad_4 nil [:shift-mode :!rc-mode :!cntrl-mode]
+                  {:alone {:key :!Rh :halt true} :delayed {:canceled {:key :!Rh}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
+
+                 [:keypad_4 nil [:!space-mode :!rc-mode :!cntrl-mode]
+                  {:alone {:key :h :halt true} :delayed {:canceled {:key :h}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
+
+                 [:right_arrow nil [:!space-mode :!shift-mode :!cntrl-mode]
                   {:alone {:key :escape :halt true} :delayed {:canceled {:key :escape}} :held {:set ["rc-mode" 1] :repeat false} :afterup {:set ["rc-mode" 0]}}]
                  ]
          }
@@ -101,9 +104,9 @@
                  ]
          }
         {
-         :des "t-mode"
+         :des "shift-mode"
          :rules [
-                 :t-mode
+                 :shift-mode
                  ;; left-hand
                  [:tab :!Rw] [:q :!Re] [:w :!Rr]
                  [:e :!Rt] [:caps_lock :!Ra] [:a :!Rs]
@@ -133,7 +136,6 @@
          :des "rc-mode"
          :rules [
                  :rc-mode
-                 ;; left-hand
                  [:tab :!R1] [:q :!R2] [:w :non_us_backslash]
                  [:e :!R0] [:caps_lock :comma] [:a :period] [:s :!Rperiod]
                  [:left_shift :!Requal_sign]
@@ -153,17 +155,34 @@
                  [:keypad_hyphen :!R5]
                  ]
          }
+{
+         :des "cntrl-mode"
+         :rules [
+                 :cntrl-mode
+                 ;; left-hand
+                 [:tab :!Ww] [:q :!We] [:w :!Wr]
+                 [:e :!Wt] [:caps_lock :!Wa] [:a :!Ws]
+                 [:s :!Wd]
+                 [:d :!Wf]
+                 [:left_shift :!Wq]
+                 [:grave_accent_and_tilde :!Wg]
+                 [:z :!Wc]
+                 [:x :!Wv]
+                 [:c :!Wb]
+                 [:keypad_1 :!Wn]
+                 [:keypad_2 :!Wm]
+                 [:keypad_3 :!Wy]
+                 [:keypad_4 :!Wh]
+                 [:keypad_5 :!Wj]
+                 [:keypad_6 :!Wk]
+                 [:keypad_7 :!Wu]
+                 [:keypad_8 :!Wi]
+                 [:keypad_9 :!Wo]
+                 [:keypad_enter :!Wp]
+                 [:keypad_plus :!Wl]
+                 [:keypad_hyphen :!Wn]
+                 ]
+         }
+
         ]
  }
-
-                        ;; "description": "keypad_1 plus command_r to ]",
-                        ;; "description": "keypad_2 plus command_r to ]",
-                        ;; "description": "keypad_3 plus command_r to <",
-                        ;; "description": "keypad_enter plus command_r to -",
-                        ;; "description": "keypad_4 plus command_r to (",
-                        ;; "description": "keypad_5 plus command_r to )",
-                        ;; "description": "keypad_6 plus command_r to {",
-                        ;; "description": "keypad_7 plus command_r to #",
-                        ;; "description": "keypad_8 plus command_r to $",
-                        ;; "description": "keypad_9 plus command_r to $",
-                        ;; "description": "keypad_hyphen plus command_r to %",
