@@ -31,7 +31,22 @@
 
  :main [ 
         {:des "Simple remaps"
-         :rules [[:tab :w] [:q :e] [:w :r] [:e :t] [:caps_lock :a] [:a :s] [:s :d] [:down_arrow :tab]]}
+         :rules [[:condi :!t-mode :!space-mode]
+                 ;; left-hand
+                 [:tab :w] [:q :e] [:w :r] [:e :t] [:caps_lock :a] [:a :s] [:s :d] [:down_arrow :tab] [:left_shift :q] [:grave_accent_and_tilde :g] [:z :c] [:x :v] [:c :b]
+                 ;; right-hand
+                 [:keypad_1 :n]
+                 [:keypad_2 :m]
+                 [:keypad_3 :y]
+                 [:keypad_5 :j]
+                 [:keypad_6 :k]
+                 [:keypad_7 :u]
+                 [:keypad_8 :i]
+                 [:keypad_9 :o]
+                 [:keypad_enter :p]
+                 [:keypad_plus :l]
+                 [:keypad_hyphen :n]
+                 ]}
         {:des "Remaps using left-command"
          :rules [[:!Cdown_arrow :!Ctab] [:!Ctab :!Cw]]}
         {:des "Remaps using right-command"
@@ -52,11 +67,20 @@
                    }]
 
                  ;t-mode
+
+                 [:d nil [:t-mode]
+                  {:alone {:key :!Rf :halt true} :delayed {:canceled {:key :!Rf}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
+
                  [:d nil [:!space-mode]
                   {:alone {:key :f :halt true} :delayed {:canceled {:key :d}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
+
+                 [:keypad_4 nil [:t-mode]
+                  {:alone {:key :!Rh :halt true} :delayed {:canceled {:key :!Rh}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
+
+                 [:keypad_4 nil [:!space-mode]
+                  {:alone {:key :h :halt true} :delayed {:canceled {:key :h}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
                  ]
          }
-
         {
          :des "space-mode"
          :rules [
@@ -67,20 +91,34 @@
                  [:m [:notify "Pressed n - m"]]
                  ]
          }
-          
         {
          :des "t-mode"
          :rules [
                  :t-mode
-                 [:tab :!Rw]
-                 [:q [:!Re]] 
-                 [:d [:notify "Pressed t - d"]]
-                 [:m [:notify "Pressed t - m"]]
+                 [:tab :!Rw] [:q :!Re] [:w :!Rr]
+                 [:e :!Rt] [:caps_lock :!Ra] [:a :!Rs]
+                 [:s :!Rd]
+                 [:d :!Rf]
+                 [:left_shift :!Rq]
+                 [:grave_accent_and_tilde :!Rg]
+                 [:z :!Rc]
+                 [:x :!Rv]
+                 [:c :!Rb]
+                 ;; right-hand
+                 [:keypad_1 :!Rn]
+                 [:keypad_2 :!Rm]
+                 [:keypad_3 :!Ry]
+                 [:keypad_4 :!Rh]
+                 [:keypad_5 :!Rj]
+                 [:keypad_6 :!Rk]
+                 [:keypad_7 :!Ru]
+                 [:keypad_8 :!Ri]
+                 [:keypad_9 :!Ro]
+                 [:keypad_enter :!Rp]
+                 [:keypad_plus :!Rl]
+                 [:keypad_hyphen :!Rn]
                  ]
          }
-
         ]
  }
-
-
 
