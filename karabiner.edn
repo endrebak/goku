@@ -31,7 +31,7 @@
 
  :main [ 
         {:des "Simple remaps"
-         :rules [[:condi :!t-mode :!space-mode]
+         :rules [[:condi :!t-mode :!space-mode :!rc-mode]
                  ;; left-hand
                  [:tab :w] [:q :e] [:w :r] [:e :t] [:caps_lock :a] [:a :s] [:s :d] [:down_arrow :tab] [:left_shift :q] [:grave_accent_and_tilde :g] [:z :c] [:x :v] [:c :b]
                  ;; right-hand
@@ -53,8 +53,6 @@
          :rules [[:!Qtab :!R1]]}
         {:des "Remaps using left shift"
          :rules [[:!Stab :!Sw]]}
-        {:des "Right arrow to right command"
-         :rules [[:right_arrow :right_command nil {:alone :escape}]]}
         ;NOTE: When adding a new layer, if you want it to be able to cross with an old one, you must add the name negated (:!new_name) to all other mod-tap layer conditions
         {
          :des "mod-tap layers"
@@ -68,33 +66,45 @@
 
                  ;t-mode
 
-                 [:d nil [:t-mode]
+                 [:d nil [:t-mode :!rc-mode]
                   {:alone {:key :!Rf :halt true} :delayed {:canceled {:key :!Rf}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
 
-                 [:d nil [:!space-mode]
+                 [:d nil [:!space-mode :!rc-mode]
                   {:alone {:key :f :halt true} :delayed {:canceled {:key :d}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
 
-                 [:keypad_4 nil [:t-mode]
+                 [:keypad_4 nil [:t-mode :!rc-mode]
                   {:alone {:key :!Rh :halt true} :delayed {:canceled {:key :!Rh}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
 
-                 [:keypad_4 nil [:!space-mode]
+                 [:keypad_4 nil [:!space-mode :!rc-mode]
                   {:alone {:key :h :halt true} :delayed {:canceled {:key :h}} :held {:set ["t-mode" 1] :repeat false} :afterup {:set ["t-mode" 0]}}]
+
+                 [:right_arrow nil [:!space-mode :!t-mode]
+                  {:alone {:key :escape :halt true} :delayed {:canceled {:key :escape}} :held {:set ["rc-mode" 1] :repeat false} :afterup {:set ["rc-mode" 0]}}]
                  ]
          }
         {
          :des "space-mode"
          :rules [
                  :space-mode
-                 [:t [:notify "Pressed n - t"]]
-                 [:o [:notify "Pressed n - o"]]
-                 [:d [:notify "Pressed n - d"]]
-                 [:m [:notify "Pressed n - m"]]
+                 [:keypad_1 :keypad_7]
+                 [:keypad_2 :keypad_8]
+                 [:keypad_3 :keypad_9]
+                 [:keypad_4 :keypad_4]
+                 [:keypad_5 :keypad_5]
+                 [:keypad_6 :keypad_6]
+                 [:keypad_7 :keypad_1]
+                 [:keypad_8 :keypad_2]
+                 [:keypad_9 :keypad_3]
+                 [:keypad_hyphen [:!Rclose_bracket :spacebar]]
+                 [:keypad_equal_sign [:!Eclose_bracket :spacebar]]
+                 [:keypad_slash :backslash]
                  ]
          }
         {
          :des "t-mode"
          :rules [
                  :t-mode
+                 ;; left-hand
                  [:tab :!Rw] [:q :!Re] [:w :!Rr]
                  [:e :!Rt] [:caps_lock :!Ra] [:a :!Rs]
                  [:s :!Rd]
@@ -119,6 +129,31 @@
                  [:keypad_hyphen :!Rn]
                  ]
          }
+{
+         :des "rc-mode"
+         :rules [
+                 :rc-mode
+                 ;; left-hand
+                 [:tab :!R1] [:q :!R2] [:w :non_us_backslash]
+                 [:e :!R0] [:caps_lock :comma] [:a :period] [:s :!Rperiod]
+                 [:left_shift :!Requal_sign]
+                 [:grave_accent_and_tilde :!Rcomma]
+                 [:z :!Rbackslash] [:x :!E7] [:a :period] [:c :!R7]
+                 ]
+         }
         ]
  }
-
+                        ;; "description": "z plus command_r to *",
+                        ;; "description": "x plus command_r to |",
+                        ;; "description": "c plus command_r to /",
+                        ;; "description": "keypad_1 plus command_r to ]",
+                        ;; "description": "keypad_2 plus command_r to ]",
+                        ;; "description": "keypad_3 plus command_r to <",
+                        ;; "description": "keypad_enter plus command_r to -",
+                        ;; "description": "keypad_4 plus command_r to (",
+                        ;; "description": "keypad_5 plus command_r to )",
+                        ;; "description": "keypad_6 plus command_r to {",
+                        ;; "description": "keypad_7 plus command_r to #",
+                        ;; "description": "keypad_8 plus command_r to $",
+                        ;; "description": "keypad_9 plus command_r to $",
+                        ;; "description": "keypad_hyphen plus command_r to %",
