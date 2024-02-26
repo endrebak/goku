@@ -139,13 +139,23 @@
                  [:left_shift :!Requal_sign]
                  [:grave_accent_and_tilde :!Rcomma]
                  [:z :!Rbackslash] [:x :!E7] [:a :period] [:c :!R7]
+                 [:keypad_1 :!E8]
+                 [:keypad_2 :!E9]
+                 [:keypad_3 :grave_accent_and_tilde]
+                 [:keypad_enter :!Rgrave_accent_and_tilde]
+                 [:keypad_4 :!Rh]
+                 [:keypad_5 :!Rj]
+                 [:keypad_6 :!Rk]
+                 [:keypad_7 :!Ru]
+                 [:keypad_8 :!Ri]
+                 [:keypad_9 :!Ro]
+                 [:keypad_plus :slash]
+                 [:keypad_hyphen :!R5]
                  ]
          }
         ]
  }
-                        ;; "description": "z plus command_r to *",
-                        ;; "description": "x plus command_r to |",
-                        ;; "description": "c plus command_r to /",
+
                         ;; "description": "keypad_1 plus command_r to ]",
                         ;; "description": "keypad_2 plus command_r to ]",
                         ;; "description": "keypad_3 plus command_r to <",
