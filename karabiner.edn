@@ -66,13 +66,13 @@
                  ;n-mode
 
 
-                 [:keypad_plus nil [:!space-mode :shift-mode :!cntrl-mode :!right-arrow-mode]
+                 [:keypad_plus nil [:!space-mode :shift-mode :!cntrl-mode :!command-mode :!right-arrow-mode]
                   {:alone {:key :!Rl :halt true} :delayed {:canceled {:key :!Rl}} :held {:set ["plus-mode" 1] :repeat false} :afterup {:set ["plus-mode" 0]}}]
 
-                 [:keypad_plus nil [:!space-mode :!shift-mode :!cntrl-mode :!right-arrow-mode]
+                 [:keypad_plus nil [:!space-mode :!shift-mode :!cntrl-mode :!command-mode :!right-arrow-mode]
                   {:alone {:key :l :halt true} :delayed {:canceled {:key :l}} :held {:set ["plus-mode" 1] :repeat false} :afterup {:set ["plus-mode" 0]}}]
 
-                 [:keypad_plus nil [:!space-mode :!shift-mode :!cntrl-mode :right-arrow-mode]
+                 [:keypad_plus nil [:!space-mode :!shift-mode :!cntrl-mode :!command-mode :right-arrow-mode]
                   {:alone {:key :return_or_enter :halt true} :delayed {:canceled {:key :return_or_enter}} :held {:set ["plus-mode" 1] :repeat false} :afterup {:set ["plus-mode" 0]}}]
 
                  [:spacebar nil [:!shift-mode]
@@ -81,35 +81,45 @@
                    ;:params {:alone 199 :held 200 :delay 200} 
                    }]
 
-                 [:s nil [:command-mode :!shift-mode :!right-arrow-mode :!space-mode]
+                 [:s nil [:command-mode :!shift-mode :!right-arrow-mode :!space-mode :!cntrl-mode]
                   {:alone {:key :!Wd :halt true} :delayed {:canceled {:key :!Wd}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
+
+                 [:s nil [:!shift-mode :!right-arrow-mode :!space-mode :!command-mode :!cntrl-mode :!plus-mode]
+                  {:alone {:key :d :halt true} :delayed {:canceled {:key :d}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
+
+                 [:s nil [:plus-mode :!cntrl-mode :!shift-mode :!right-arrow-mode :!space-mode :!command-mode]
+                  {:alone {:key :up_arrow :halt true} :delayed {:canceled {:key :up_arrow}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+
 
                  [:keypad_6 nil [:command-mode :!shift-mode :!right-arrow-mode :!space-mode]
                   {:alone {:key :!Wk :halt true} :delayed {:canceled {:key :!Wk}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
 
-                 [:s nil [:!shift-mode :!right-arrow-mode :!space-mode]
-                  {:alone {:key :d :halt true} :delayed {:canceled {:key :d}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
-
                  [:keypad_6 nil [:!shift-mode :!right-arrow-mode :!space-mode]
                   {:alone {:key :k :halt true} :delayed {:canceled {:key :k}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
+
+                 [:a nil [:plus-mode :!cntrl-mode :!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :down_arrow :halt true} :delayed {:canceled {:key :down_arrow}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
 
                  [:a nil [:cntrl-mode :!shift-mode :!right-arrow-mode :!space-mode]
                   {:alone {:key :!Ws :halt true} :delayed {:canceled {:key :!Ws}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
 
                  [:keypad_5 nil [:cntrl-mode :!shift-mode :!right-arrow-mode :!space-mode]
-                  {:alone {:key :!Wl :halt true} :delayed {:canceled {:key :!Wl}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+                  {:alone {:key :!Wj :halt true} :delayed {:canceled {:key :!Wj}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
 
                  [:a nil [:!shift-mode :!right-arrow-mode :!space-mode]
                   {:alone {:key :s :halt true} :delayed {:canceled {:key :s}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
 
                  [:keypad_5 nil [:!shift-mode :!right-arrow-mode :!space-mode]
-                  {:alone {:key :l :halt true} :delayed {:canceled {:key :l}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+                  {:alone {:key :j :halt true} :delayed {:canceled {:key :j}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
                  ;shift-mode
-                 [:d nil [:shift-mode :!right-arrow-mode :!space-mode :!cntrl-mode]
+                 [:d nil [:shift-mode :!right-arrow-mode :!space-mode :!cntrl-mode :!command-mode]
                   {:alone {:key :!Rf :halt true} :delayed {:canceled {:key :!Rf}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
 
-                 [:d nil [:!space-mode :!right-arrow-mode :!cntrl-mode]
+                 [:d nil [:!space-mode :!right-arrow-mode :!cntrl-mode :!command-mode :!plus-mode]
                   {:alone {:key :f :halt true} :delayed {:canceled {:key :d}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
+
+                 [:d nil [:plus-mode :!command-mode :!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :right_arrow :halt true} :delayed {:canceled {:key :right_arrow}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
 
                  [:keypad_4 nil [:shift-mode :!right-arrow-mode :!cntrl-mode :!plus-mode]
                   {:alone {:key :!Rh :halt true} :delayed {:canceled {:key :!Rh}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
@@ -119,9 +129,6 @@
 
                  [:keypad_4 nil [:plus-mode :!shift-mode :!cntrl-mode :!command-mode]
                   {:alone [:open "/Applications/Brave Browser.app/"] :delayed {:canceled {:key :escape}} :held {:set ["right-arrow-mode" 1] :repeat false} :afterup {:set ["right-arrow-mode" 0]}}]
-
-                 [:right_arrow nil [:!space-mode :!shift-mode :!cntrl-mode]
-                  {:alone {:key :escape :halt true} :delayed {:canceled {:key :escape}} :held {:set ["right-arrow-mode" 1] :repeat false} :afterup {:set ["right-arrow-mode" 0]}}]
 
                  [:right_arrow nil [:!space-mode :!shift-mode :!cntrl-mode]
                   {:alone {:key :escape :halt true} :delayed {:canceled {:key :escape}} :held {:set ["right-arrow-mode" 1] :repeat false} :afterup {:set ["right-arrow-mode" 0]}}]
@@ -262,9 +269,8 @@
                  :plus-mode
                  ;; left-hand
                  [:tab :!Qw] [:q :!Qe] [:w :!Qr]
-                 [:e :!Qt] [:caps_lock :!Qa] [:a :!Qs]
-                 [:s :!Qd]
-                 [:d :!Qf]
+                 [:caps_lock :left_arrow]
+                 [:e :!Qt]
                  [:left_shift :!Qq]
                  [:grave_accent_and_tilde :!Qg]
                  [:z :!Qc]
