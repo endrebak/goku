@@ -27,13 +27,15 @@
 
  :templates {
              :notify "osascript -e 'display notification \"%s\"'"
+             :open "open \"%s\""
              }
 
  :main [ 
         {:des "Simple remaps"
-         :rules [[:condi :!shift-mode :!space-mode :!right-arrow-mode :!cntrl-mode :!command-mode]
+         :rules [[:condi :!shift-mode :!space-mode :!right-arrow-mode :!cntrl-mode :!command-mode :!plus-mode]
                  ;; left-hand
                  [:caps_lock :a]
+                 [:keypad_equal_sign :delete_or_backspace]
                  [:tab :w] [:q :e] [:w :r] [:e :t] [:down_arrow :tab] [:left_shift :q] [:grave_accent_and_tilde :g] [:z :c] [:x :v] [:c :b]
                  ;; right-hand
                  [:keypad_1 :n]
@@ -43,7 +45,6 @@
                  [:keypad_8 :i]
                  [:keypad_9 :o]
                  [:keypad_enter :p]
-                 [:keypad_plus :l]
                  [:keypad_hyphen :n]
                  ]}
         ;NOTE: When adding a new layer, if you want it to be able to cross with an old one, you must add the name negated (:!new_name) to all other mod-tap layer conditions
@@ -63,6 +64,17 @@
                  ;; Q W E R stands for right_command right_control right_option right_shift
 
                  ;n-mode
+
+
+                 [:keypad_plus nil [:!space-mode :shift-mode :!cntrl-mode :!right-arrow-mode]
+                  {:alone {:key :!Rl :halt true} :delayed {:canceled {:key :!Rl}} :held {:set ["plus-mode" 1] :repeat false} :afterup {:set ["plus-mode" 0]}}]
+
+                 [:keypad_plus nil [:!space-mode :!shift-mode :!cntrl-mode :!right-arrow-mode]
+                  {:alone {:key :l :halt true} :delayed {:canceled {:key :l}} :held {:set ["plus-mode" 1] :repeat false} :afterup {:set ["plus-mode" 0]}}]
+
+                 [:keypad_plus nil [:!space-mode :!shift-mode :!cntrl-mode :right-arrow-mode]
+                  {:alone {:key :return_or_enter :halt true} :delayed {:canceled {:key :return_or_enter}} :held {:set ["plus-mode" 1] :repeat false} :afterup {:set ["plus-mode" 0]}}]
+
                  [:spacebar nil [:!shift-mode]
                   {:alone {:key :spacebar :halt true} :delayed {:canceled {:key :spacebar}} :held {:set ["space-mode" 1] :repeat false} :afterup {:set ["space-mode" 0]}
                    ;if want to define ms delays here
@@ -99,14 +111,21 @@
                  [:d nil [:!space-mode :!right-arrow-mode :!cntrl-mode]
                   {:alone {:key :f :halt true} :delayed {:canceled {:key :d}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
 
-                 [:keypad_4 nil [:shift-mode :!right-arrow-mode :!cntrl-mode]
+                 [:keypad_4 nil [:shift-mode :!right-arrow-mode :!cntrl-mode :!plus-mode]
                   {:alone {:key :!Rh :halt true} :delayed {:canceled {:key :!Rh}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
 
-                 [:keypad_4 nil [:!space-mode :!right-arrow-mode :!cntrl-mode]
+                 [:keypad_4 nil [:!space-mode :!right-arrow-mode :!cntrl-mode :!plus-mode]
                   {:alone {:key :h :halt true} :delayed {:canceled {:key :h}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
+
+                 [:keypad_4 nil [:plus-mode :!shift-mode :!cntrl-mode :!command-mode]
+                  {:alone [:open "/Applications/Brave Browser.app/"] :delayed {:canceled {:key :escape}} :held {:set ["right-arrow-mode" 1] :repeat false} :afterup {:set ["right-arrow-mode" 0]}}]
 
                  [:right_arrow nil [:!space-mode :!shift-mode :!cntrl-mode]
                   {:alone {:key :escape :halt true} :delayed {:canceled {:key :escape}} :held {:set ["right-arrow-mode" 1] :repeat false} :afterup {:set ["right-arrow-mode" 0]}}]
+
+                 [:right_arrow nil [:!space-mode :!shift-mode :!cntrl-mode]
+                  {:alone {:key :escape :halt true} :delayed {:canceled {:key :escape}} :held {:set ["right-arrow-mode" 1] :repeat false} :afterup {:set ["right-arrow-mode" 0]}}]
+
                  ]
          }
         {
@@ -154,7 +173,6 @@
                  [:keypad_8 :!Ri]
                  [:keypad_9 :!Ro]
                  [:keypad_enter :!Rp]
-                 [:keypad_plus :!Rl]
                  [:keypad_hyphen :!Rn]
                  ]
          }
@@ -232,6 +250,34 @@
                  [:keypad_6 :!Qk]
                  [:keypad_7 :!Qu]
                  [:keypad_8 :!Qi]
+                 [:keypad_9 :!Qo]
+                 [:keypad_enter :!Qp]
+                 [:keypad_plus :!Ql]
+                 [:keypad_hyphen :!Qn]
+                 ]
+         }
+{
+         :des "plus-mode"
+         :rules [
+                 :plus-mode
+                 ;; left-hand
+                 [:tab :!Qw] [:q :!Qe] [:w :!Qr]
+                 [:e :!Qt] [:caps_lock :!Qa] [:a :!Qs]
+                 [:s :!Qd]
+                 [:d :!Qf]
+                 [:left_shift :!Qq]
+                 [:grave_accent_and_tilde :!Qg]
+                 [:z :!Qc]
+                 [:x :!Qv]
+                 [:c :!Qb]
+                 [:keypad_1 :!Qn]
+                 [:keypad_2 :!Qm]
+                 [:keypad_3 :!Qy]
+                 [:keypad_4 :a]
+                 [:keypad_5 :!Qj]
+                 [:keypad_6 :!Qk]
+                 [:keypad_7 [:open "/Applications/Brave Browser.app/"]]
+                 [:keypad_8 [:open "/Applications/iTerm.app/"]]
                  [:keypad_9 :!Qo]
                  [:keypad_enter :!Qp]
                  [:keypad_plus :!Ql]
