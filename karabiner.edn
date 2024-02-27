@@ -31,14 +31,14 @@
 
  :main [ 
         {:des "Simple remaps"
-         :rules [[:condi :!shift-mode :!space-mode :!rc-mode :!cntrl-mode :!command-mode]
+         :rules [[:condi :!shift-mode :!space-mode :!right-arrow-mode :!cntrl-mode :!command-mode]
                  ;; left-hand
-                 [:tab :w] [:q :e] [:w :r] [:e :t] [:caps_lock :a] [:a :s] [:down_arrow :tab] [:left_shift :q] [:grave_accent_and_tilde :g] [:z :c] [:x :v] [:c :b]
+                 [:caps_lock :a]
+                 [:tab :w] [:q :e] [:w :r] [:e :t] [:down_arrow :tab] [:left_shift :q] [:grave_accent_and_tilde :g] [:z :c] [:x :v] [:c :b]
                  ;; right-hand
                  [:keypad_1 :n]
                  [:keypad_2 :m]
                  [:keypad_3 :y]
-                 [:keypad_5 :j]
                  [:keypad_7 :u]
                  [:keypad_8 :i]
                  [:keypad_9 :o]
@@ -60,6 +60,8 @@
                        ;;  "description": "keypad_6 held down to left_command",
                        ;;  "description": "keypad_4 held down to right shift",
 
+                 ;; Q W E R stands for right_command right_control right_option right_shift
+
                  ;n-mode
                  [:spacebar nil [:!shift-mode]
                   {:alone {:key :spacebar :halt true} :delayed {:canceled {:key :spacebar}} :held {:set ["space-mode" 1] :repeat false} :afterup {:set ["space-mode" 0]}
@@ -67,32 +69,44 @@
                    ;:params {:alone 199 :held 200 :delay 200} 
                    }]
 
-                 [:s nil [:cntrl-mode :!shift-mode :!rc-mode :!space-mode]
-                  {:alone {:key :!Wd :halt true} :delayed {:canceled {:key :!Wd}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+                 [:s nil [:command-mode :!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :!Wd :halt true} :delayed {:canceled {:key :!Wd}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
 
-                 [:keypad_6 nil [:cntrl-mode :!shift-mode :!rc-mode :!space-mode]
-                  {:alone {:key :!Wk :halt true} :delayed {:canceled {:key :!Wk}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+                 [:keypad_6 nil [:command-mode :!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :!Wk :halt true} :delayed {:canceled {:key :!Wk}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
 
-                 [:s nil [:!shift-mode :!rc-mode :!space-mode]
-                  {:alone {:key :d :halt true} :delayed {:canceled {:key :d}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+                 [:s nil [:!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :d :halt true} :delayed {:canceled {:key :d}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
 
-                 [:keypad_5 nil [:!shift-mode :!rc-mode :!space-mode]
-                  {:alone {:key :j :halt true} :delayed {:canceled {:key :j}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
+                 [:keypad_6 nil [:!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :k :halt true} :delayed {:canceled {:key :k}} :held {:set ["command-mode" 1] :repeat false} :afterup {:set ["command-mode" 0]}}]
+
+                 [:a nil [:cntrl-mode :!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :!Ws :halt true} :delayed {:canceled {:key :!Ws}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+
+                 [:keypad_5 nil [:cntrl-mode :!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :!Wl :halt true} :delayed {:canceled {:key :!Wl}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+
+                 [:a nil [:!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :s :halt true} :delayed {:canceled {:key :s}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
+
+                 [:keypad_5 nil [:!shift-mode :!right-arrow-mode :!space-mode]
+                  {:alone {:key :l :halt true} :delayed {:canceled {:key :l}} :held {:set ["cntrl-mode" 1] :repeat false} :afterup {:set ["cntrl-mode" 0]}}]
                  ;shift-mode
-                 [:d nil [:shift-mode :!rc-mode :!space-mode :!cntrl-mode]
+                 [:d nil [:shift-mode :!right-arrow-mode :!space-mode :!cntrl-mode]
                   {:alone {:key :!Rf :halt true} :delayed {:canceled {:key :!Rf}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
 
-                 [:d nil [:!space-mode :!rc-mode :!cntrl-mode]
+                 [:d nil [:!space-mode :!right-arrow-mode :!cntrl-mode]
                   {:alone {:key :f :halt true} :delayed {:canceled {:key :d}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
 
-                 [:keypad_4 nil [:shift-mode :!rc-mode :!cntrl-mode]
+                 [:keypad_4 nil [:shift-mode :!right-arrow-mode :!cntrl-mode]
                   {:alone {:key :!Rh :halt true} :delayed {:canceled {:key :!Rh}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
 
-                 [:keypad_4 nil [:!space-mode :!rc-mode :!cntrl-mode]
+                 [:keypad_4 nil [:!space-mode :!right-arrow-mode :!cntrl-mode]
                   {:alone {:key :h :halt true} :delayed {:canceled {:key :h}} :held {:set ["shift-mode" 1] :repeat false} :afterup {:set ["shift-mode" 0]}}]
 
                  [:right_arrow nil [:!space-mode :!shift-mode :!cntrl-mode]
-                  {:alone {:key :escape :halt true} :delayed {:canceled {:key :escape}} :held {:set ["rc-mode" 1] :repeat false} :afterup {:set ["rc-mode" 0]}}]
+                  {:alone {:key :escape :halt true} :delayed {:canceled {:key :escape}} :held {:set ["right-arrow-mode" 1] :repeat false} :afterup {:set ["right-arrow-mode" 0]}}]
                  ]
          }
         {
@@ -111,6 +125,8 @@
                  [:keypad_hyphen [:!Rclose_bracket :spacebar]]
                  [:keypad_equal_sign [:!Eclose_bracket :spacebar]]
                  [:keypad_slash :backslash]
+                 [:keypad_plus :slash]
+                 [:keypad_0 :return_or_enter]
                  ]
          }
         {
@@ -143,11 +159,12 @@
                  ]
          }
 {
-         :des "rc-mode"
+         :des "right-arrow-mode"
          :rules [
-                 :rc-mode
+                 :right-arrow-mode
                  [:tab :!R1] [:q :!R2] [:w :non_us_backslash]
                  [:e :!R0] [:caps_lock :comma] [:a :period] [:s :!Rperiod]
+                 [:d :!Rcomma]
                  [:left_shift :!Requal_sign]
                  [:grave_accent_and_tilde :!Rcomma]
                  [:z :!Rbackslash] [:x :!E7] [:a :period] [:c :!R7]
@@ -155,14 +172,14 @@
                  [:keypad_2 :!E9]
                  [:keypad_3 :grave_accent_and_tilde]
                  [:keypad_enter :!Rgrave_accent_and_tilde]
-                 [:keypad_4 :!Rh]
-                 [:keypad_5 :!Rj]
-                 [:keypad_6 :!Rk]
-                 [:keypad_7 :!Ru]
-                 [:keypad_8 :!Ri]
-                 [:keypad_9 :!Ro]
-                 [:keypad_plus :slash]
-                 [:keypad_hyphen :!R5]
+                 [:keypad_4 :!R8]
+                 [:keypad_5 :!R9]
+                 [:keypad_6 :!RE8]
+                 [:keypad_7 :!R3]
+                 [:keypad_8 :!R4]
+                 [:keypad_9 :!R5]
+                 [:keypad_plus :!RE9]
+                 [:keypad_hyphen :!R7]
                  ]
          }
 {
@@ -191,6 +208,34 @@
                  [:keypad_enter :!Wp]
                  [:keypad_plus :!Wl]
                  [:keypad_hyphen :!Wn]
+                 ]
+         }
+{
+         :des "command-mode"
+         :rules [
+                 :command-mode
+                 ;; left-hand
+                 [:tab :!Qw] [:q :!Qe] [:w :!Qr]
+                 [:e :!Qt] [:caps_lock :!Qa] [:a :!Qs]
+                 [:s :!Qd]
+                 [:d :!Qf]
+                 [:left_shift :!Qq]
+                 [:grave_accent_and_tilde :!Qg]
+                 [:z :!Qc]
+                 [:x :!Qv]
+                 [:c :!Qb]
+                 [:keypad_1 :!Qn]
+                 [:keypad_2 :!Qm]
+                 [:keypad_3 :!Qy]
+                 [:keypad_4 :!Qh]
+                 [:keypad_5 :!Qj]
+                 [:keypad_6 :!Qk]
+                 [:keypad_7 :!Qu]
+                 [:keypad_8 :!Qi]
+                 [:keypad_9 :!Qo]
+                 [:keypad_enter :!Qp]
+                 [:keypad_plus :!Ql]
+                 [:keypad_hyphen :!Qn]
                  ]
          }
 
